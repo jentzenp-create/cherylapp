@@ -144,8 +144,12 @@ export default function AnnotationPopover({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 4 }}
             transition={{ duration: 0.15 }}
-            className="fixed z-50 glass rounded-2xl shadow-2xl shadow-stone-200/60 p-3 min-w-[200px]"
+            className="fixed z-50 rounded-2xl shadow-2xl shadow-stone-200/60 p-3 min-w-[200px]"
             style={{
+              background: 'rgba(255, 255, 255, 0.90)',
+              backdropFilter: 'blur(16px)',
+              WebkitBackdropFilter: 'blur(16px)',
+              border: '1px solid rgba(255, 255, 255, 0.9)',
               left: Math.min(position.x, window.innerWidth - 240),
               top: position.y + 8,
             }}
@@ -174,7 +178,7 @@ export default function AnnotationPopover({
             {newAnnotation && step === 'menu' && (
               <div className="space-y-1">
                 <p className="text-xs text-stone-400 px-2 pb-1 border-b border-stone-100 truncate max-w-[180px]">
-                  "{newAnnotation.text.slice(0, 30)}{newAnnotation.text.length > 30 ? '…' : ''}"
+                  &quot;{newAnnotation.text.slice(0, 30)}{newAnnotation.text.length > 30 ? '…' : ''}&quot;
                 </p>
 
                 {/* Highlight options */}

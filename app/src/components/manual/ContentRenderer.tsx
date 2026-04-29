@@ -117,7 +117,7 @@ export default function ContentRenderer({ section, annotations, onAnnotationChan
             </div>
             {ann.exact_text && (
               <p className="text-xs text-stone-400 italic mb-2 pl-3 border-l-2 border-stone-200">
-                "{ann.exact_text}"
+                &quot;{ann.exact_text}&quot;
               </p>
             )}
             <p className="text-stone-700">{ann.content}</p>

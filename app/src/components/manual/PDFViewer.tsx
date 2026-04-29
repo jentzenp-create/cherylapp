@@ -394,7 +394,7 @@ export default function PDFViewer({ pdfUrl, manualId, initialPage }: Props) {
           <div className="p-10 m-4 rounded-xl glass border border-red-200 bg-red-50/50">
             <h2 className="text-red-800 font-semibold mb-2">Technical Issue loading PDF</h2>
             <p className="text-red-700 text-sm mb-4">
-              We couldn't load the file from: <code className="bg-white/50 px-1 rounded">{fullPdfUrl}</code>
+              We couldn&apos;t load the file from: <code className="bg-white/50 px-1 rounded">{fullPdfUrl}</code>
             </p>
             {pdfError && (
               <p className="text-xs font-mono bg-red-100 text-red-700 p-2 rounded mb-3 break-all">
