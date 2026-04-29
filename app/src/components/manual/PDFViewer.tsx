@@ -108,7 +108,7 @@ function SelectionTip({ content, position, hideTipAndSelection, onSave, clientNa
   }
 
   return (
-    <div className="glass rounded-2xl shadow-xl shadow-stone-200/60 p-3 min-w-[200px] max-w-[264px] z-50">
+    <div className="rounded-2xl shadow-xl shadow-stone-200/60 p-3 min-w-[200px] max-w-[264px] z-50" style={{ background: '#ffffff', border: '1px solid rgba(0,0,0,0.08)' }}>
       {step === 'choice' && (
         <div className="space-y-1">
           <p className="text-xs text-stone-400 px-2 pb-1.5 border-b border-stone-100 truncate">
@@ -227,7 +227,7 @@ function HighlightPopup({
   onDelete: (id: string) => void
 }) {
   return (
-    <div className="glass rounded-2xl shadow-xl shadow-stone-200/60 p-3 min-w-[160px] max-w-[240px]">
+    <div className="rounded-2xl shadow-xl shadow-stone-200/60 p-3 min-w-[160px] max-w-[240px]" style={{ background: '#ffffff', border: '1px solid rgba(0,0,0,0.08)' }}>
       <p className="text-xs text-stone-400 mb-1.5 px-1">
         {highlight.scope === 'client' ? 'Client annotation' : 'Global annotation'}
       </p>
