@@ -1,0 +1,93 @@
+# Goal Description
+Build a web application for a therapy practitioner to transition her workflow from static PDF manuals to a dynamic, interactive digital system. The app will allow her to navigate 6 massive manuals during Zoom sessions seamlessly, take client-specific and global notes, highlight text, manage client profiles, and edit the manual content itself. It requires a touch-friendly interface optimized for iPad.
+
+## Product Requirements (PRD)
+
+### 1. Core Workflows
+* **Session Management:** Centralized "Start Session" / "End Session" flow. When active, notes and highlights are automatically tied to the selected client and session.
+* **Client CRM:** A directory of clients. Each client profile logs past sessions, tied annotations, and notes for easy review and context switching.
+* **Dual-Layer Annotations:**
+  * *Client-Specific:* Saved to the client's session history (not visible when with other clients).
+  * *Global (Practitioner):* Persists across all sessions for her own benefit.
+* **Content Viewing & Navigation:** Lightning-fast navigation of 6 discrete manuals containing text and diagrams. Quick jump table of contents that bypasses heavy scrolling.
+* **Content Editing:** A dedicated editing mode outside of active sessions. Practitioners can drop a global note to review later during a session, then enter Edit Mode (post-session) to permanently rewrite manual content.
+
+### 2. Tech Stack
+* **Frontend:** Next.js (React), Tailwind CSS, Framer Motion (smooth micro-animations), Lucide React (icons).
+* **Backend / Database / Auth:** Supabase (PostgreSQL, Authentication, Storage for diagrams).
+* **Hosting:** Vercel for fast, global deployment.
+
+## User Review Required
+*(No pending items! Ready for handoff to execution agent)*
+
+## Design & UI Direction
+The application should have a premium, modern, and calming aesthetic suitable for therapy and subconscious transformations.
+* **Vibe:** "Light and airy," evoking the feeling of being in the clouds.
+* **Gradients:** Use soft, diffused, cloud-like gradients in the background (whites, very pale blues or soft grays).
+* **Accents:** "Sun ray" colors (warm, soft yellows or golds) for primary actions, active highlights, and important UI elements.
+* **UI Elements:** Use glassmorphism (frosted glass effects) for sidebars and popover menus to maintain the light, airy feel without feeling heavy or blocking content.
+
+![Concept UI Mockup](C:\Users\KHUserEnglish\.gemini\antigravity\brain\bc3ae3c8-c824-43b3-98f9-88bcd9a47240\therapist_app_mockup_1773098394118.png)
+
+## Proposed Changes
+
+### Infrastructure & Database Setup
+* Initialize Next.js app.
+* Set up Supabase client.
+* **Database Schema:**
+  * `users` / `practitioners`: Auth handling.
+  * `clients`: id, name, contact info, notes, created_at.
+  * `sessions`: id, client_id, start_time, end_time, summary.
+  * `manuals`: id, title, description.
+  * `manual_sections`: id, manual_id, chapter, content (Markdown/HTML), order_idx.
+  * `annotations`: id, section_id, type ('highlight'|'note'), scope ('client'|'global'), client_id (optional), session_id (optional), content, exact_text_reference, position_data.
+
+### Authentication Layer
+#### [NEW] `src/app/login/page.tsx`
+Practitioner secure login page using Supabase Auth.
+#### [NEW] `src/middleware.ts`
+Route protection to ensure only authenticated users can access the app and its data.
+
+### Layout & Global State
+#### [NEW] `src/components/layout/AppLayout.tsx`
+Sidebar with navigation (Manuals, Clients, Review Notes).
+#### [NEW] `src/store/useSessionStore.ts`
+Zustand global store to hold the *Active Session* state (Current Client, Start Time). Floating widget indicating an active session so she always knows who the current notes are saving for.
+
+### Client CRM
+#### [NEW] `src/app/clients/page.tsx`
+Directory of all clients.
+#### [NEW] `src/app/clients/[id]/page.tsx`
+Client profile showing session history and aggregated highlights/notes chronologically.
+
+### Manual Viewer & Navigation
+#### [NEW] `src/app/manuals/page.tsx`
+Grid view of the 6 manuals.
+#### [NEW] `src/app/manuals/[id]/page.tsx`
+Table of contents and chapters list for a specific manual.
+#### [NEW] `src/app/manuals/[id]/read/page.tsx`
+The core reading interface. Touch-optimized scrolling, large interactive touch targets.
+#### [NEW] `src/components/manual/ContentRenderer.tsx`
+A component to render the parsed text and diagrams. Intercepts text selection to show a contextual popover ("Highlight", "Add Note").
+
+### Annotation System
+#### [NEW] `src/components/manual/AnnotationPopover.tsx`
+Appears directly above selected text on touch/click. Options depend on `useSessionStore.ts` active state (e.g., Client Highlight vs Global Highlight, adding Notes). Also includes options to **delete an existing highlight or note** when tapping on it.
+#### [NEW] `src/app/review/page.tsx`
+A dashboard to view practitioner notes collected over time to decide what to edit permanently.
+
+### Manual Parsing Protocol (To Do)
+* **Scripts:** A Python or Node-based script will need to be written to ingest the 6 PDFs. The exact implementation details of this script will be determined once the user uploads the PDFs for analysis, focusing on maintaining chapter structure and inline diagrams.
+
+### Editing System
+#### [NEW] `src/app/manuals/[id]/edit/page.tsx`
+A rich text editor interface for modifying the raw `manual_sections` content post-session.
+
+## Verification Plan
+### Manual Verification
+* Log in as practitioner.
+* Create a client and "Start a Session" with them.
+* Open a manual, select text, and apply a Client Highlight.
+* End Session. Verify the highlight appears on the Client's CRM profile.
+* Add a Global Note to a manual. Verify it appears in the Review Dashboard.
+* Use the Edit Mode to change a sentence in the manual. Verify the change persists in the reading view seamlessly.

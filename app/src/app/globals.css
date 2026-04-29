@@ -1,0 +1,113 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  /* Cloud/sky palette */
+  --color-sky-50: #f0f7ff;
+  --color-sky-100: #e0f0fe;
+  --color-sky-200: #bae2fd;
+  --color-cloud-white: #f8fafd;
+
+  /* Sun-ray gold accent palette */
+  --color-gold-50: #fffbeb;
+  --color-gold-100: #fef3c7;
+  --color-gold-200: #fde68a;
+  --color-gold-300: #fcd34d;
+  --color-gold-400: #fbbf24;
+  --color-gold-500: #f59e0b;
+  --color-gold-600: #d97706;
+
+  /* Neutral warm grays */
+  --color-stone-50: #fafaf9;
+  --color-stone-100: #f5f5f4;
+  --color-stone-200: #e7e5e4;
+  --color-stone-300: #d6d3d1;
+  --color-stone-400: #a8a29e;
+  --color-stone-500: #78716c;
+  --color-stone-600: #57534e;
+  --color-stone-700: #44403c;
+  --color-stone-800: #292524;
+  --color-stone-900: #1c1917;
+
+  /* Font */
+  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
+}
+
+:root {
+  --background: #f0f7ff;
+  --foreground: #1c1917;
+}
+
+body {
+  background: linear-gradient(135deg, #f0f7ff 0%, #f8fafd 40%, #fef9f0 100%);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+}
+
+/* Glassmorphism utility */
+.glass {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.glass-dark {
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+/* Gold highlight for annotations */
+.annotation-highlight-client {
+  background: rgba(251, 191, 36, 0.35);
+  border-bottom: 2px solid #f59e0b;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.annotation-highlight-global {
+  background: rgba(147, 197, 253, 0.4);
+  border-bottom: 2px solid #60a5fa;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+/* Inline sticky note marker */
+.note-marker {
+  display: inline-block;
+  cursor: pointer;
+  font-size: 0.78em;
+  vertical-align: super;
+  margin-left: 2px;
+  line-height: 1;
+  opacity: 0.75;
+  transition: opacity 0.15s, transform 0.15s;
+  user-select: none;
+}
+.note-marker:hover {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+/* Simple fade+slide animation for note cards */
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-in { animation: fadeSlideIn 0.15s ease-out; }
+
+/* Touch-optimized scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 3px;
+}

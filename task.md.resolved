@@ -1,0 +1,28 @@
+# App Development Task List
+
+- [ ] Project Setup & Infrastructure
+  - [ ] Initialize Next.js project with Tailwind CSS
+  - [ ] Set up Supabase project (Database, Auth, Storage)
+  - [ ] Configure Vercel deployment
+- [ ] Database Schema & Supabase Setup
+  - [ ] Create `clients` table
+  - [ ] Create `sessions` table
+  - [ ] Create `manual_content` table (for parsed manuals)
+  - [ ] Create `annotations` table (highlights & notes)
+  - [ ] Set up Row Level Security (RLS)
+- [ ] Authentication & Shell
+  - [ ] Implement practitioner login/auth flow
+  - [ ] Create main app layout (Sidebar, Header, Main Content Area)
+- [ ] Client CRM & Session Management
+  - [ ] Build Client Directory page
+  - [ ] Build Client Profile page (Session history, notes)
+  - [ ] Implement "Start/End Session" global state & UI
+- [ ] Manual Viewer & Content Navigation
+  - [ ] Build Manual Index / Table of Contents
+  - [ ] Build Content Viewer (support text + diagrams)
+  - [ ] Implement rapid navigation / scrolling
+- [ ] Annotation & Editing System
+  - [ ] Implement Text Selection & Highlighting (Client vs. Global)
+  - [ ] Implement Notes (Client vs. Global)
+  - [ ] Build "Practitioner Notes" review dashboard
+  - [ ] Implement "Edit Mode" for permanent manual text updates
