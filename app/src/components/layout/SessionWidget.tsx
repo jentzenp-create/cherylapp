@@ -3,7 +3,7 @@
 import { useSessionStore } from '@/store/useSessionStore'
 import { createClient } from '@/lib/supabase/client'
 import { motion, AnimatePresence } from 'framer-motion'
-import { UserCheck, Square } from 'lucide-react'
+import { Square } from 'lucide-react'
 import { useState } from 'react'
 
 export default function SessionWidget() {

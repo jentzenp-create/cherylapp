@@ -20,7 +20,12 @@ export default async function ReviewPage() {
   const notes = (annotations as Annotation[] | null)?.filter((a) => a.type === 'note') ?? []
   const highlights = (annotations as Annotation[] | null)?.filter((a) => a.type === 'highlight') ?? []
 
-  function getLink(ann: any) {
+  type ReviewAnnotation = Annotation & {
+    section?: { id: string; title: string; manual_id: string; manual?: { id: string; title: string } };
+    manual?: { id: string; title: string };
+  }
+
+  function getLink(ann: ReviewAnnotation) {
     const section = ann.section
     const manual = ann.manual
     if (section?.manual_id) return `/manuals/${section.manual_id}/read?section=${section.id}`
@@ -29,7 +34,7 @@ export default async function ReviewPage() {
     return null
   }
 
-  function getSource(ann: any) {
+  function getSource(ann: ReviewAnnotation) {
     const section = ann.section
     const manual = ann.manual
     const manualTitle = section?.manual?.title ?? manual?.title ?? 'Manual'

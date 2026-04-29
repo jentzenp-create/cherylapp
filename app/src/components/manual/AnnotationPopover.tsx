@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Highlighter, MessageSquare, Globe, Trash2, X } from 'lucide-react'
+import { Highlighter, MessageSquare, Globe, Trash2 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { useSessionStore } from '@/store/useSessionStore'
 import type { Annotation, AnnotationType, AnnotationScope } from '@/types'
@@ -12,13 +12,6 @@ interface PopoverPosition {
   y: number
 }
 
-interface Props {
-  sectionId: string
-  onAnnotationCreated: () => void
-  // For tapping an existing annotation
-  existingAnnotation?: Annotation | null
-  onDismiss: () => void
-}
 
 interface NewAnnotationState {
   text: string
@@ -42,7 +35,7 @@ export function useAnnotationPopover(sectionId: string, onCreated: () => void) {
     setNoteText('')
   }
 
-  function handleExistingAnnotationTap(annotation: Annotation, position: PopoverPosition) {
+  function handleExistingAnnotationTap(annotation: Annotation, _position: PopoverPosition) {
     setNewAnnotation(null)
     setExistingAnnotation(annotation)
     setStep('menu')
@@ -146,10 +139,8 @@ export default function AnnotationPopover({
             transition={{ duration: 0.15 }}
             className="fixed z-50 rounded-2xl shadow-2xl shadow-stone-200/60 p-3 min-w-[200px]"
             style={{
-              background: 'rgba(255, 255, 255, 0.90)',
-              backdropFilter: 'blur(16px)',
-              WebkitBackdropFilter: 'blur(16px)',
-              border: '1px solid rgba(255, 255, 255, 0.9)',
+              background: '#ffffff',
+              border: '1px solid rgba(0, 0, 0, 0.08)',
               left: Math.min(position.x, window.innerWidth - 240),
               top: position.y + 8,
             }}
